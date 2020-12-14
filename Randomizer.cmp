@@ -1,0 +1,56 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="boundaryVal1" type="Integer" />
+    <aura:attribute name="boundaryVal2" type="Integer" />
+    <aura:attribute name="outputVal" type="Integer" />
+    
+    <aura:html tag="style">.toastMessage.forceActionsText{
+							white-space : pre-line !important;}
+    </aura:html>
+    
+	<lightning:layout>
+    	<lightning:layoutItem>
+        	<lightning:card>
+            	<form class="slds-form-element_stacked">
+                    <lightning:input aura:id="itemForm" 
+                                     label="{!$Label.c.boundaryVal1}"
+                                     type="number"                                                                          
+                                     class="slds-text-font_monospace"
+                                     value="{!v.boundaryVal1}" 
+                                     required="true" 
+                                     />
+                    <lightning:input aura:id="itemForm" 
+                                     label="{!$Label.c.boundaryVal2}"
+                                     type="number"                                                                        
+                                     class="slds-text-font_monospace"
+                                     value="{!v.boundaryVal2}" 
+                                     required="true" 
+                                     />
+                    <br />
+					<div class="page-section page-header slds-grid slds-wrap slds-badge">
+                        <h3 class="slds-size_2-of-3">{!$Label.c.number_otput}</h3>
+                        <p class="slds-size_1-of-3 slds-text-align_right">{!v.outputVal}</p>                
+                    </div>                    
+                    <aura:if isTrue="{!and( not(empty(v.boundaryVal1)), not(empty(v.boundaryVal2)) )}">
+                        <lightning:button label="{!$Label.c.validate}"                                          
+                                          class="slds-button_success slds-m-top--medium"                                      
+                                          onclick="{!c.clickValidate}"
+                                          disabled="false" />                        
+                        <aura:set attribute="else">
+                        	<lightning:button label="{!$Label.c.validate}"                                              
+                                          	  class="slds-button_success slds-m-top--medium"                                      
+                                              onclick="{!c.clickValidate}"
+                                              disabled="true" />                            
+                        </aura:set>
+                    </aura:if>                    
+                    <lightning:button label="{!$Label.c.randomize}"
+                                      aura:id="btn_random"
+                                      class="slds-button slds-m-top--medium 
+                                             slds-p-left_small" 
+                                      variant="brand"
+                                      onclick="{!c.clickRandomize}"
+                                      disabled="true" />                    
+            	</form>                
+            </lightning:card>            
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
